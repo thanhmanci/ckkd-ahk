@@ -1,0 +1,31 @@
+#SingleInstance Force
+Tab::
+    Send, f
+    Sleep, 10
+    Send, f
+    Sleep, 10
+    Send, f
+    Sleep, 10
+    Send, f
+    Sleep, 10
+    Send, f
+    Sleep, 10
+    Send, f
+    Sleep, 10
+    Send, f
+    Sleep, 10
+    Send, f
+    Sleep, 10
+    Send, f
+    Sleep, 10
+    Send, f
+    Sleep, 10
+    Send, f
+    Sleep, 10
+    Send, f
+    Sleep, 10
+    Send, f
+    Sleep, 10
+    Send, f
+    Sleep, 10
+    Send {Click 1720 1415 Left}
