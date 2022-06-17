@@ -26,19 +26,19 @@ skillType := 0
     If ((A_TickCount - T) > 500){
 
       ; Trượng Uy CD
-      If (skillType = 0) and colorCompare.CompareAtPos(1785, 1355, "0x9FCFF9") {
+      If (skillType = 0) and colorCompare.CompareAtPos(1668, 1120, "0xFBFAFD") {
         skillType = 1
         doneSkillDelay = 3800
       }
 
       ; Trượng Uy Hám Viễn Sơn CD
-      If (skillType = 0) and colorCompare.CompareAtPos(1823, 1349, "0xABBCE5") {
+      If (skillType = 0) and colorCompare.CompareAtPos(1708, 1120, "0x607DE0") {
         skillType = 2
         doneSkillDelay = 3600
       }
 
       ; Trượng Uy Hám Đạp Bình Xuyên CD
-      If (skillType = 0) and colorCompare.CompareAtPos(1859, 1355, "0xF8FAFF") {
+      If (skillType = 0) and colorCompare.CompareAtPos(1737, 1121, "0x93C3EF") {
         skillType = 3
         doneSkillDelay = 3600
       }
@@ -53,8 +53,14 @@ skillType := 0
         Send 88
         skillType = 0
       }
+
+      If (colorCompare.CompareAtPos(1667, 1153, "0xEFF8FF")) {
+        Send rrr
+        Send gg
+      }
+
       doneSkillDelay = 0
-      SetToolTip(doneSkillDelay)
+      SetToolTip(skillType)
 
     }
 
@@ -62,6 +68,21 @@ skillType := 0
   ToggleCheck = OFF
   ; SetToolTip(ToggleCheck)
 Return
+
+~RButton::8
+WinGetActiveTitle, Title
+isgameActive := stringSimilarity.compareTwoStrings(Title, "Cổ kiếm kỳ đàm Online") = 0.24
+If ((ToggleCheck = "ON") && isgameActive) {
+  Send {F2}{F2}
+  Send xx
+}
+Return
+
+~F1::
+  Sleep, 100
+  Send xxxx
+Return
+
 ^!x::
   ; SetToolTip("")
 ExitApp

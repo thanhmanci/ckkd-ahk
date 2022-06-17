@@ -1,14 +1,14 @@
 
 
 SetToolTip(text := ""){
-  ToolTipFont("s12", "Comic Sans MS")
-  If (text = "ON") {
-    ToolTipColor("52c41a", "White")
-  }
-  Else{
-    ToolTipColor("ff4d4f", "White")
-  }
-  ToolTip, %text%, 1725, 1298
+    ToolTipFont("s12", "Comic Sans MS")
+    If (text = "OFF") {
+        ToolTipColor("ff4d4f", "White")
+    }
+    Else{
+        ToolTipColor("52c41a", "White")
+    }
+    ToolTip, %text%, 1830, 1048
 }
 
 ToolTipFont(Options := "", Name := "", hwnd := "") {
@@ -18,7 +18,7 @@ ToolTipFont(Options := "", Name := "", hwnd := "") {
     else
         DllCall("SendMessage", "ptr", hwnd, "uint", 0x30, "ptr", hfont, "ptr", 0)
 }
- 
+
 ToolTipColor(Background := "", Text := "", hwnd := "") {
     static bc := "", tc := ""
     if (hwnd = "") {
@@ -31,28 +31,28 @@ ToolTipColor(Background := "", Text := "", hwnd := "") {
     else {
         VarSetCapacity(empty, 2, 0)
         DllCall("UxTheme.dll\SetWindowTheme", "ptr", hwnd, "ptr", 0
-            , "ptr", (bc != "" && tc != "") ? &empty : 0)
+        , "ptr", (bc != "" && tc != "") ? &empty : 0)
         if (bc != "")
             DllCall("SendMessage", "ptr", hwnd, "uint", 1043, "ptr", bc, "ptr", 0)
         if (tc != "")
             DllCall("SendMessage", "ptr", hwnd, "uint", 1044, "ptr", tc, "ptr", 0)
     }
 }
- 
+
 _TTHook() {
     static hook := 0
     if !hook
         hook := DllCall("SetWindowsHookExW", "int", 4
-            , "ptr", RegisterCallback("_TTWndProc"), "ptr", 0
-            , "uint", DllCall("GetCurrentThreadId"), "ptr")
+    , "ptr", RegisterCallback("_TTWndProc"), "ptr", 0
+    , "uint", DllCall("GetCurrentThreadId"), "ptr")
 }
- 
+
 _TTWndProc(nCode, _wp, _lp) {
     Critical 999
-   ;lParam  := NumGet(_lp+0*A_PtrSize)
-   ;wParam  := NumGet(_lp+1*A_PtrSize)
-    uMsg    := NumGet(_lp+2*A_PtrSize, "uint")
-    hwnd    := NumGet(_lp+3*A_PtrSize)
+    ;lParam  := NumGet(_lp+0*A_PtrSize)
+    ;wParam  := NumGet(_lp+1*A_PtrSize)
+    uMsg := NumGet(_lp+2*A_PtrSize, "uint")
+    hwnd := NumGet(_lp+3*A_PtrSize)
     if (nCode >= 0 && (uMsg = 1081 || uMsg = 1036)) {
         _hack_ = ahk_id %hwnd%
         WinGetClass wclass, %_hack_%
@@ -63,7 +63,7 @@ _TTWndProc(nCode, _wp, _lp) {
     }
     return DllCall("CallNextHookEx", "ptr", 0, "int", nCode, "ptr", _wp, "ptr", _lp, "ptr")
 }
- 
+
 _TTG(Cmd, Arg1, Arg2 := "") {
     static htext := 0, hgui := 0
     if !htext {

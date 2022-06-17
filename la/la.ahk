@@ -7,6 +7,7 @@ SetWorkingDir %A_ScriptDir%
 if not A_IsAdmin
   Run *RunAs "%A_ScriptFullPath%" ;
 
+PVE_mode := "DPS"
 ToggleCheck = OFF
 SetToolTip(ToggleCheck)
 SetKeyDelay, 0, 0
@@ -16,19 +17,30 @@ SetKeyDelay, 0, 0
   SendMode, Event
   isgameActive := stringSimilarity.compareTwoStrings(Title, "Cổ kiếm kỳ đàm Online") = 0.24
   ToggleCheck = ON
-  SetToolTip(ToggleCheck)
-  T := A_TickCount
+  ; T := A_TickCount
+  If (ToggleCheck) {
+    SetToolTip(PVE_mode)
+  } Else {
+    SetToolTip("")
+  }
   while GetKeyState("LButton") && isgameActive {
-    ; onTarget := colorCompare.CompareAtPos(1152, 842, "0x3D94B4")
-    If ((A_TickCount - T) > 500){
-      Send {F12}{F12}{F12}{F12}{F12}{F12}{F12}
-      ; If colorCompare.CompareAtPos(1743, 1024, "0xD9FFFD") or colorCompare.CompareAtPos(1942, 1105, "0xDEB937") {
-      If colorCompare.CompareAtPos(1942, 1105, "0xDEB937") or colorCompare.CompareAtPos(1865, 1165, "0xBCE8F7") {
+    onTarget := colorCompare.CompareAtPos(85, 82, "0xBDEDF9")
+    If (PVE_mode = "DPS" and onTarget){
+      Send {F12}{F12}{F12}
+      If colorCompare.CompareAtPos(1670, 1155, "0xB8FEFF") and colorCompare.CompareAtPos(1699, 1112, "0xDFCEB7") {
+        Send ```
+      }
+      If colorCompare.CompareAtPos(1808, 1116, "0xF3E8F3") {
+        Send ```
+      }
+      If colorCompare.CompareAtPos(1944, 1102, "0xB38125") or colorCompare.CompareAtPos(1739, 1112, "0xDBFFFD") {
         Send 3333
       }
-      ; If colorCompare.CompareAtPos(1672, 1156, "0x2BEEFF") and !(colorCompare.CompareAtPos(1942, 1105, "0xDEB937")) {
-      ;   Send ```
-      ; }
+    } Else If (PVE_mode = "TANK" and onTarget) {
+      Send {F12}{F12}{F12}
+      If not colorCompare.CompareAtPos(1928, 1103, "0x9B5F22") {
+        Send 3333
+      }
     }
   }
   ToggleCheck = OFF
@@ -37,22 +49,26 @@ Return
 
 ~RButton::
   WinGetActiveTitle, Title
+  onTarget := colorCompare.CompareAtPos(85, 82, "0xBDEDF9")
   isgameActive := stringSimilarity.compareTwoStrings(Title, "Cổ kiếm kỳ đàm Online") = 0.24
-  If ((ToggleCheck = "ON") && isgameActive) {
-    Send 1111111
-    Sleep, 100
-    Send `````````````````
+  If ((ToggleCheck = "ON") and (PVE_mode = "TANK") && isgameActive && onTarget) {
+    Send gg{F2}{F2}
+  } Else {
+    If ((ToggleCheck = "ON") && isgameActive && onTarget) {
+      Send 1111111
+      Sleep, 100
+      Send `````````````````
+    }
   }
 Return
 
-F1::
-  WinGetActiveTitle, Title
-  isgameActive := stringSimilarity.compareTwoStrings(Title, "Cổ kiếm kỳ đàm Online") = 0.24
-  If (isgameActive) {
-    Send eeeeee
-    Send 3333333
-    Send {F12}{F12}{F12}{F12}{F12}{F12}{F12}{F12}{F12}{F12}{F12}{F12}{F12}{F12}{F12}{F12}
-    Send 2
+^Space::
+  If ((PVE_mode = "DPS")) {
+    PVE_mode = TANK
+    SetToolTip(PVE_mode)
+  } Else {
+    PVE_mode = DPS
+    SetToolTip(PVE_mode)
   }
 Return
 
