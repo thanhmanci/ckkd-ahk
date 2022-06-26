@@ -16,7 +16,7 @@ SetKeyDelay, 0, 0
   SendMode, Event
   SetToolTip(PVE_mode)
   while GetKeyState("LButton"){
-    isgameActive := colorCompare.CompareAtPos(172, 233, "0x43372B")
+    isgameActive := True
     If (!isgameActive){
       Continue
     }
@@ -42,7 +42,7 @@ SetKeyDelay, 0, 0
 Return
 
 ~RButton::
-  isgameActive := colorCompare.CompareAtPos(172, 233, "0x43372B")
+  isgameActive := True
   If (!isgameActive){
     Return
   }
@@ -59,7 +59,7 @@ Return
 
 ~r::
   WinGetActiveTitle, Title
-  isgameActive := colorCompare.CompareAtPos(172, 233, "0x43372B")
+  isgameActive := True
   If (!isgameActive){
     Return
   }

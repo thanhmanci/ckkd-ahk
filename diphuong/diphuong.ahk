@@ -3,61 +3,53 @@
 #Include C:\Users\ManCi\Desktop\ckkd\lib\colorcompare.ahk
 #Include C:\Users\ManCi\Desktop\ckkd\lib\drawImg.ahk
 #SingleInstance, Force
+#MaxThreadsPerHotkey 1
 SetWorkingDir %A_ScriptDir%
 if not A_IsAdmin
   Run *RunAs "%A_ScriptFullPath%" ;
 
+PVE_mode := "DiPhuong"
 ToggleCheck = OFF
 SetToolTip(ToggleCheck)
-SetKeyDelay, 70, 0
+SetKeyDelay, 50, 50
+; 1,2,`,r, 3,2222
 
 ~LButton::
   WinGetActiveTitle, Title
   SendMode, Event
   isgameActive := stringSimilarity.compareTwoStrings(Title, "Cổ kiếm kỳ đàm Online") = 0.24
-  ToggleCheck = ON
-  SetToolTip(ToggleCheck)
-  T := A_TickCount
-  while GetKeyState("LButton") && isgameActive {
-    ; onTarget := colorCompare.CompareAtPos(1152, 842, "0x3D94B4")
-    If ((A_TickCount - T) > 500){
-      Send 2222
-      Send 3333
-      Send rrrr
-
-    ;   If colorCompare.CompareAtPos(2027, 853, "0x9DE1F5") And colorCompare.CompareAtPos(1961, 1007, "0x25243A") {
-    ;     Send r
-    ;   }
+  while GetKeyState("LButton") and isgameActive {
+    If colorCompare.CompareAtPos(1719, 1090, "0x454240") and PVE_mode = "DiPhuong"{
+      Send ```````````````````````````````````
     }
+    SetKeyDelay, 100, 400
+    Send {F5}
   }
-  ToggleCheck = OFF
-  SetToolTip(ToggleCheck)
+  SetToolTip("OFF")
 Return
 
-; ~RButton::
+; ^Space::
 ;   WinGetActiveTitle, Title
+;   SendMode, Event
 ;   isgameActive := stringSimilarity.compareTwoStrings(Title, "Cổ kiếm kỳ đàm Online") = 0.24
-;   If ((ToggleCheck = "ON") && isgameActive) {
-;     Send 1111111
-;     Sleep, 100
-;     Send `````````````````
+;   if (isgameActive) {
+;     SetToolTip("ON")
+;     Send 12
+;     Send ```````````````````````````````````
+;     Send xxx
+;     Send rrrrrrrrrrrrrrrrr
+;     Send 3232333322222222222222222222222222222222222222222222222222
 ;   }
+
 ; Return
 
-F1::
-  WinGetActiveTitle, Title
-  isgameActive := stringSimilarity.compareTwoStrings(Title, "Cổ kiếm kỳ đàm Online") = 0.24
-  If (isgameActive) {
-    Send 1
-    Send 222222222
-    Sleep, 100
-    Send 222222222
-    Sleep, 100
-    Send 222222222
-    Sleep, 100
-    Send 333333333
-    Send xxxxxxxxx
-    Send rrrrrrrrr
+^Space::
+  If ((PVE_mode = "DiPhuong")) {
+    PVE_mode = TramPhong
+    SetToolTip(PVE_mode)
+  } Else {
+    PVE_mode = DiPhuong
+    SetToolTip(PVE_mode)
   }
 Return
 

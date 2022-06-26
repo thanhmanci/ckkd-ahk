@@ -8,7 +8,7 @@ SetToolTip(text := ""){
     Else{
         ToolTipColor("52c41a", "White")
     }
-    ToolTip, %text%, 1830, 1048
+    ToolTip, %text%, 1880, 1038
 }
 
 ToolTipFont(Options := "", Name := "", hwnd := "") {

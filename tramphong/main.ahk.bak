@@ -1,0 +1,93 @@
+#Include C:\Users\ManCi\Desktop\ckkd\lib\stringcompare.ahk
+#Include C:\Users\ManCi\Desktop\ckkd\lib\settooltip.ahk
+#Include C:\Users\ManCi\Desktop\ckkd\lib\colorcompare.ahk
+#Include C:\Users\ManCi\Desktop\ckkd\lib\drawImg.ahk
+#SingleInstance, Force
+#MaxThreadsPerHotkey 1
+#MenuMaskKey vk07 ; vk07 is unassigned.
+#InstallMouseHook 
+#InstallKeybdHook
+
+SetWorkingDir %A_ScriptDir%
+if not A_IsAdmin
+  Run *RunAs "%A_ScriptFullPath%" ;
+
+~*RButton::
+  onTarget := colorCompare.CompareAtPos(133, 115, "0xBFEFFB")
+  if !onTarget
+    Return
+  Send {F12 Down}
+  Send {F12 Down}
+  Send {F12 Down}
+  Send {F12 Down}
+~*RButton Up::
+  if !onTarget
+    Return
+  if (GetKeyState("RButton", "P")) {
+    If colorCompare.CompareAtPos(1686, 1337, "0xF8FFE6") {
+      Send rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
+    }
+  } else {
+    SetToolTip("On")
+    Send 1111111111111111111111111111111111111111111111111111111111111111111111111
+  }
+Return
+
+~LButton::
+  WinGetActiveTitle, Title
+  onTarget := colorCompare.CompareAtPos(133, 115, "0xBFEFFB")
+  if !onTarget
+    Return
+  while GetKeyState("LButton", "P") {
+    SetToolTip("")
+    if colorCompare.CompareAtPos(1755, 1343, "0x9B7470") {
+      Send 3e3e3e3e3e3e3e3e3e3e3e3e3e3e3e3e3e3e3e3e3e3e3e3e3e3e3e3e3e3e3e3e3e3e3e3e3e3e3e3e3e3e
+    }
+    Gosub, SendTide 
+  }
+Return
+
+SendTide:
+  Sleep, 1900
+  If colorCompare.CompareAtPos(1406, 1243, "0xFCFDFF") {
+    Send 11111111111
+  }
+return
+
+`::
+  WinGetActiveTitle, Title
+  onTarget := colorCompare.CompareAtPos(133, 115, "0xBFEFFB")
+  if !onTarget
+    Return
+  Send 45454545454545
+Return
+
+~3:: 
+  WinGetActiveTitle, Title
+  onTarget := colorCompare.CompareAtPos(133, 115, "0xBFEFFB")
+  if !onTarget
+    Return
+  Send 333eeee
+Return
+
+~^s::
+  Send +!f
+  Run *RunAs "%A_ScriptFullPath%" 
+Return
+
+^Space::
+  SetKeyDelay, 50, 50
+  Send 2
+  Sleep, 700
+  Send {F12 Down}{F12 Down}{F12 Down}{F12 Down}
+  Sleep, 1200
+  Send errr{F12 Up}rrrrrrr
+  Send 3e3e3e3e3e3e3e3e
+  Send ````````````````
+  SetKeyDelay, 0, 0
+return
+
+^!x::
+  ; SetToolTip("")
+ExitApp
+Return

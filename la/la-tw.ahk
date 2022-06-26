@@ -16,24 +16,23 @@ SetKeyDelay, 0, 0
   SendMode, Event
   SetToolTip(PVE_mode)
   while GetKeyState("LButton"){
-    isgameActive := colorCompare.CompareAtPos(172, 233, "0x43372B")
+    isgameActive := colorCompare.isgameActive(96, 237, "0x31453B")
     If (!isgameActive){
       Continue
     }
 
     If (PVE_mode = "DPS"){
-      If colorCompare.CompareAtPos(1767, 1002, "0xE6C73D") or colorCompare.CompareAtPos(1474, 1315, "0xD9FFFD") {
+      If colorCompare.CompareAtPos(1753, 959, "0xAD721E") or colorCompare.CompareAtPos(1525, 1371, "0xDAFDFD") {
         Send 3333
       }
-      SetKeyDelay, 50, 500
-      Send {F12}{F12}
-      SetKeyDelay, 0, 0
-      If colorCompare.CompareAtPos(1282, 1324, "0xF6FFFF") {
+      Send {F12}{F12}{F12}{F12}{F12}{F12}
+      If colorCompare.CompareAtPos(1378, 1383, "0x0FE0FF") {
         Send ```33
       }
+      Send cccccc
     } Else If (PVE_mode = "TANK") {
       Send {F12}{F12}{F12}{F12}{F12}{F12}{F12}{F12}{F12}{F12}{F12}{F12}
-      if colorCompare.CompareAtPos(1767, 1002, "0xE6C73D"){
+      if colorCompare.CompareAtPos(1753, 959, "0xAD721E"){
         Send 3
       }
     }
@@ -42,11 +41,9 @@ SetKeyDelay, 0, 0
 Return
 
 ~RButton::
-  isgameActive := colorCompare.CompareAtPos(172, 233, "0x43372B")
-  If (!isgameActive){
-    Return
-  }
-  If ((PVE_mode = "TANK")) {
+  WinGetActiveTitle, Title
+  isgameActive := colorCompare.isgameActive(96, 237, "0x31453B")
+  If ((PVE_mode = "TANK") && isgameActive) {
     Send rr{F2}{F2}
   } Else {
     If (isgameActive) {
@@ -59,11 +56,8 @@ Return
 
 ~r::
   WinGetActiveTitle, Title
-  isgameActive := colorCompare.CompareAtPos(172, 233, "0x43372B")
-  If (!isgameActive){
-    Return
-  }
-  If ((PVE_mode = "TANK")) {
+  isgameActive := colorCompare.isgameActive(96, 237, "0x31453B")
+  If ((PVE_mode = "TANK") && isgameActive) {
     Sleep, 1300
     Send g
   }
@@ -87,36 +81,4 @@ Return
 ^!x::
   SetToolTip("Exit")
 ExitApp
-Return
-
-Shift & RButton::
-  Send, f
-  Sleep, 100
-  Send, f
-  Sleep, 10
-  Send, f
-  Sleep, 10
-  Send, f
-  Sleep, 10
-  Send, f
-  Sleep, 10
-  Send, f
-  Sleep, 10
-  Send, f
-  Sleep, 10
-  Send, f
-  Sleep, 10
-  Send, f
-  Sleep, 10
-  Send, f
-  Sleep, 10
-  Send, f
-  Sleep, 10
-  Send, f
-  Sleep, 10
-  Send, f
-  Sleep, 10
-  Send, f
-  Sleep, 10
-  Send {Click 1720 1415 Left}
 Return
